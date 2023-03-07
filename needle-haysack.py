@@ -53,14 +53,37 @@ def strStr( haystack, needle):
     :rtype: int
     you need to make KMP algorithm
     """
-    r=-1
+    txtList=[c for c in haystack]
+    pattern=[c for c in needle]
+    i=0
+    j=0
+    M=len(txtList)
+    N=len(pattern)
+    lps=Lpc(needle)
+    exist=0
+    while j<N and i<M:
+        if pattern[j]==txtList[i]:
+            j+=1
+            exist+=1
+        else:
+            if j>0:
+                j=lps[j-1]
+                exist=lps[j-1]
+            else:
+                j=0 
+                exist=0
+        
+        if exist==len(pattern):
+            
+            print('index -->',i-exist+1)
+        i+=1
     
-    matches=re.finditer(needle, haystack)
-    if matches:
-        while r ==-1:
-            for match in matches:
-                r=match.start()
-    return r
+    return i-exist+1
+        
         
 
-print(Lpc('AAABAAA'))
+haystack='ABA ABAA ABABA'
+needle='BAB'
+        
+strStr( haystack, needle)
+#print(Lpc('AAABAAA'))
