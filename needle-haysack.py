@@ -1,3 +1,7 @@
+'''
+Knuth–Morris–Pratt algorithm
+author:Ammar
+'''
 import re
 import math
 def Lps(pattern):
@@ -49,7 +53,7 @@ def KMP( haystack, needle):
     N=len(pattern)
     lps=Lps(needle)
     exist=0
-    returned=int()
+    #returned=int()
     while j<N and i<M:
         if pattern[j]==txtList[i]:
             j+=1
