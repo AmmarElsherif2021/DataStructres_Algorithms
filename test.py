@@ -3,7 +3,7 @@ This is a test file for algorithms i made for this repo
 '''
 import random
 test0={
-       'input':[1,4,2,3,6,7,4,3,2],
+       'input':{[1,4,2,3,6,7,4,3,2]},
        'output':[1, 2, 2, 3, 3, 4, 4, 6, 7]
        }
 test1={
@@ -29,4 +29,8 @@ test5={
 test6={
        'input':[11,32,53,994,45,66,67,18],
        'output':[11, 18, 32, 45, 53, 66, 67, 994]
+       }
+test7={
+       'input':[11,11,11,11,11],
+       'output':[11,11,11,11,11]
        }
