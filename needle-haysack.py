@@ -1,23 +1,19 @@
 import re
 import math
-def Lpc(pattern):
-    lpc=[0]
+def Lps(pattern):
+    lps=[0]
     patternList=[c for c in pattern]
-    print('th epattern list __',patternList)
-    i=int()
-    iQ=list()
-    kQ=list()
-    
-    j=1
-    k=int()
-    value=int()
+    j=1     #pointer to iterate the main pattern list
+    i=int() #pointer to iterate the suffix
+    k=int() #pointer to iterate the prefix
+    value=int() #value of the longest pattern prefix which is also a suffix
     
     while patternList and j<len(patternList):
         value = 0
         i = 0
-        k =1 #int(math.ceil(j/2))
-        print('---------------------pattern',pattern[:j])
-        iteration=k
+        k =1 #int(math.ceil(j/2)) 
+        #print('---------------------pattern',pattern[:j])
+        iteration=k #save original k pointer position for each j
         while k<=j : 
             
             if patternList[i]==patternList[k]:
@@ -31,22 +27,14 @@ def Lpc(pattern):
                 iteration+=1
                 k=iteration
                  
-            print('value ',value)
-            
-            
-           
-            
-            
-           
-           
-        
-        lpc.append(value)
-       
+            #print('value ',value)
+
+        lps.append(value)   
         j+=1
       
-    return lpc        
+    return lps        
     
-def strStr( haystack, needle):
+def KMP( haystack, needle):
     """
     :type haystack: str
     :type needle: str
@@ -59,31 +47,37 @@ def strStr( haystack, needle):
     j=0
     M=len(txtList)
     N=len(pattern)
-    lps=Lpc(needle)
+    lps=Lps(needle)
     exist=0
+    returned=int()
     while j<N and i<M:
         if pattern[j]==txtList[i]:
             j+=1
             exist+=1
+            i+=1
         else:
             if j>0:
                 j=lps[j-1]
-                exist=lps[j-1]
+                
             else:
                 j=0 
-                exist=0
-        
-        if exist==len(pattern):
-            
-            print('index -->',i-exist+1)
-        i+=1
+                i+=1
+        print('------i',i)
+        print('exist',exist)
+        print('j',j)   
     
-    return i-exist+1
+    if j==len(pattern):
+        return i-j
+    else:
+        return -1
+       
+    
+ 
         
         
 
-haystack='ABA ABAA ABABA'
-needle='BAB'
+haystack='mississippi'
+needle='issippi'
         
-strStr( haystack, needle)
+print(KMP( haystack, needle))
 #print(Lpc('AAABAAA'))
