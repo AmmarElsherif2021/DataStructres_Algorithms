@@ -54,6 +54,11 @@ DEVIDE -> CONQUER -> COMBINE
 * Merge search --
 
 '''
+'''
+# a function to merge two lists while they are completly sorted 
+else it compares each two flags in the 2 lists
+
+'''
 def merge(X:list,Y:list)->list:
     X=list(X)
     Y=list(Y)
@@ -72,9 +77,11 @@ def merge(X:list,Y:list)->list:
     
     Z.extend(X[i:])
     Z.extend(Y[j:])
-    print('z -->',Z)
+    #print('z -->',Z)
     return Z
-        
+'''
+sort usng recursive mergesort functions
+'''   
 def mergeSort(nums):
     nums=list(nums)
     if len(nums)<=1:
@@ -93,11 +100,11 @@ def mergeSort(nums):
     return sortedNums
         
         
-print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))        
+#print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))        
         
 '''
-Test complixty
-....
+Test time complixty and plot em
+///////////////////////////////
 '''
 def get_var_name(var):
   for name, value in globals().items():
@@ -128,10 +135,10 @@ def Otime(n,function):
     plt.plot(Ninputs, times[:n],label=f'{funcName}') # plot the x and y values
     plt.legend()
     plt.show() # show the plot
-
+'''
 Otime(100,insertion_sort)
 Otime(100,bubble)
 Otime(100,mergeSort)
-        
+'''        
     
     
