@@ -1,6 +1,12 @@
 '''
 Bubble search method
+complexity = O(n**2) => bad
 '''
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+import math
 #import test
 def bubble(inList):
     #declare pointers vars i,j
@@ -21,8 +27,104 @@ def bubble(inList):
         j-=1
     return inList
 
-print(bubble([1,88,2,-1,10,99,77,3,56]))
+#print(bubble([1,88,2,-1,10,99,77,3,56]))
+
 '''
-for test in tests:
-    print(bubble(test['input'])==test['output'])
+insertion sort
 '''
+def insertion_sort(nums):
+    nums = list(nums)
+    #print('nums unmodified',nums)
+    for i in range(len(nums)):
+        #print('i =',i)
+        cur = nums.pop(i)
+        #print('cur =',cur)
+        j = i-1
+        #print('j=',j)
+        while j >=0 and nums[j] > cur:
+            j -= 1
+            #print('j is >=0 =>',j)
+        nums.insert(j+1, cur)
+        #print('nums modified',nums)
+    return nums            
+#print(insertion_sort([22,11,3,1,77,5,-9,0,5,66]))
+
+'''
+DEVIDE -> CONQUER -> COMBINE
+* Merge search --
+
+'''
+def merge(x,y):
+    x=list(x)
+    y=list(y)
+    N=len(x)
+    M=len(y)
+    z=[]
+    i,j=0,0 #iterator pointers for x,y lists
+    while i<N and j<M:
+        if type(x[i]) == int and type(y[j]) == int and x[i]<=y[j]:
+            z.append(x[i])
+            i+=1
+        else:
+            z.append(y[j])
+            j+=1
+    
+    z.extend(x[i:])
+    z.extend(y[j:])
+    print('z -->',z)
+    return z
+        
+def mergeSort(nums):
+    nums=list(nums)
+    if len(nums)<=1:
+        return nums
+    print('starter nums ',nums)
+    N=len(nums)
+    half=math.ceil(N/2)
+    
+    leftHalf,rightHalf=mergeSort(nums[:half]),mergeSort([nums[half:]])
+    sortedNums=merge(leftHalf,rightHalf)
+    return sortedNums
+        
+        
+print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))        
+        
+'''
+Test complixty
+....
+'''
+def get_var_name(var):
+  for name, value in globals().items():
+    if value is var:
+      return name
+  return None
+def Otime(n,function):
+    times=[]
+    Ninputs=range(n)
+    inputs=[]
+    start0=time.time()
+    while time.time()-start0<10:
+        for i in range(n):
+            
+            for j in range(10*i):
+                inputs.append(random.randint(0,n))
+            start=time.time()
+            function(inputs)
+            end=time.time()
+            elapsed=end-start
+            times.append(elapsed*10)
+            inputs.clear()
+        print('times',times)
+        print('inputs',Ninputs)
+    #x = np.linspace(0, 100)
+    #plt.hist(inputs)
+    funcName=get_var_name(function)
+    plt.plot(Ninputs, times[:n],label=f'{funcName}') # plot the x and y values
+    plt.legend()
+    plt.show() # show the plot
+
+#Otime(100,insertion_sort)
+#Otime(100,bubble)
+        
+    
+    

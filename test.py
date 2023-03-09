@@ -2,6 +2,12 @@
 This is a test file for algorithms i made for this repo
 '''
 import random
+import numpy as np
+import matplotlib as plt
+import time
+
+'''Test cases
+'''
 test0={
        'input':{[1,4,2,3,6,7,4,3,2]},
        'output':[1, 2, 2, 3, 3, 4, 4, 6, 7]
@@ -34,3 +40,30 @@ test7={
        'input':[11,11,11,11,11],
        'output':[11,11,11,11,11]
        }
+
+'''
+Test complixty
+'''
+def Otime(n):
+    times=[]
+    Ninputs=range(n)
+    inputs=[]
+    start0=time.time()
+    while time.time()-start0<10:
+        for i in range(n):
+            
+            for j in range(10*i):
+                inputs.append(random.randint(0,n))
+            start=time.time()
+            #insertion_sort(inputs) #function required for test
+            end=time.time()
+            elapsed=end-start
+            times.append(elapsed*10)
+            inputs.clear()
+        print('times',times)
+        print('inputs',Ninputs)
+    #x = np.linspace(0, 100)
+    #plt.hist(inputs)
+    plt.plot(Ninputs, times[:n]) # plot the x and y values
+    plt.show() # show the plot
+
