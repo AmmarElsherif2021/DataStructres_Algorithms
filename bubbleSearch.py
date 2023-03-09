@@ -54,25 +54,26 @@ DEVIDE -> CONQUER -> COMBINE
 * Merge search --
 
 '''
-def merge(x,y):
-    x=list(x)
-    y=list(y)
-    N=len(x)
-    M=len(y)
-    z=[]
+def merge(X:list,Y:list)->list:
+    X=list(X)
+    Y=list(Y)
+    N=len(X)
+    M=len(Y)
+    Z=[]
     i,j=0,0 #iterator pointers for x,y lists
     while i<N and j<M:
-        if type(x[i]) == int and type(y[j]) == int and x[i]<=y[j]:
-            z.append(x[i])
+        if type(X[i]) == int and type(Y[j]) == int and X[i]<=Y[j]:
+            Z.append(X[i])
             i+=1
+            
         else:
-            z.append(y[j])
+            Z.append(Y[j])
             j+=1
     
-    z.extend(x[i:])
-    z.extend(y[j:])
-    print('z -->',z)
-    return z
+    Z.extend(X[i:])
+    Z.extend(Y[j:])
+    print('z -->',Z)
+    return Z
         
 def mergeSort(nums):
     nums=list(nums)
@@ -82,7 +83,12 @@ def mergeSort(nums):
     N=len(nums)
     half=math.ceil(N/2)
     
-    leftHalf,rightHalf=mergeSort(nums[:half]),mergeSort([nums[half:]])
+    leftHalf=mergeSort(nums[:half])
+    print('lefthalf',leftHalf)
+    rightHalf=mergeSort(nums[half:])
+    print('righthalf',rightHalf)
+    
+    
     sortedNums=merge(leftHalf,rightHalf)
     return sortedNums
         
@@ -123,8 +129,9 @@ def Otime(n,function):
     plt.legend()
     plt.show() # show the plot
 
-#Otime(100,insertion_sort)
-#Otime(100,bubble)
+Otime(100,insertion_sort)
+Otime(100,bubble)
+Otime(100,mergeSort)
         
     
     

@@ -5,11 +5,12 @@ import random
 import numpy as np
 import matplotlib as plt
 import time
+import math
 
 '''Test cases
 '''
 test0={
-       'input':{[1,4,2,3,6,7,4,3,2]},
+       'input':[1,4,2,3,6,7,4,3,2],
        'output':[1, 2, 2, 3, 3, 4, 4, 6, 7]
        }
 test1={
@@ -40,7 +41,32 @@ test7={
        'input':[11,11,11,11,11],
        'output':[11,11,11,11,11]
        }
-
+tests=[test0,test1,test2,test3,test4,test5,test6,test7]
+def merge(X:list,Y:list)->list:
+    X=list(X)
+    Y=list(Y)
+    N=len(X)
+    M=len(Y)
+    Z=[]
+    i,j=0,0 #iterator pointers for x,y lists
+    while i<N and j<M:
+        if type(X[i]) == int and type(Y[j]) == int and X[i]<=Y[j]:
+            Z.append(X[i])
+            i+=1
+            
+        else:
+            Z.append(Y[j])
+            j+=1
+    
+    Z.extend(X[i:])
+    Z.extend(Y[j:])
+    print('z -->',Z)
+    return Z
+        
+'''
+for test in tests:
+    print('*************',int(mergeSort(test['input']) == test['output']))
+'''
 '''
 Test complixty
 '''
