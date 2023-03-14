@@ -113,8 +113,8 @@ def partition(nums, start=0,end=None):
         end=len(nums)-1
     
     l,r=start,end-1
-    while r<l:
-        if nums[l]<=nums[r-1]:
+    while r>l:
+        if nums[l]<=nums[end]:
             l+=1
         elif nums[r]>nums[end]:
             r-=1
@@ -122,13 +122,13 @@ def partition(nums, start=0,end=None):
             nums[l],nums[r]=nums[r],nums[l]
     
     if nums[l]>nums[end]:
-        nums[end],nums[l]=nums[l],nums[end]
+        nums[l],nums[end]=nums[end],nums[l]
         return l
     else:
         return end
 
 def quickSort(nums,start=0,end=None):
-    if not end:
+    if end is None:
         nums=list(nums)
         end=len(nums)-1
     
