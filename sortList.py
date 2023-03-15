@@ -106,6 +106,8 @@ def mergeSort(nums):
 '''
 Quick sort 
 
+cobined of partition() and quickSort()
+
 '''        
 def partition(nums, start=0,end=None):
     if end is None:
