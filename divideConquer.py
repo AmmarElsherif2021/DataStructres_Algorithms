@@ -14,36 +14,79 @@ author: ammar
 these functions are problems I practiced on leetcode
 '''
 import operator
-def extractMax(nums):
-    pass
+import time
+import random 
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.interpolate as si
+import math
+
+def maxCrossSum(nums):
+    mid=len(nums)//2
+    rightSum=-10000000
+    leftSum=-100000000
+    tempSum=0
+    for i in range(mid,-1,-1):
+        tempSum+=nums[i]
+        if leftSum<tempSum:
+            leftSum=tempSum
+    tempSum=0
+    for i in range(mid+1,len(nums)):
+        tempSum+=nums[i]
+        if rightSum<tempSum:
+            rightSum=tempSum
+    return leftSum+rightSum
 def maxSubArray(nums):
+    if len(nums)==1:
+        return nums[0]
+    mid=len(nums)//2
+    left=nums[:mid]
+    right=nums[mid:]
+    leftSum=maxSubArray(left)
+    rightSum=maxSubArray(right)
+    middleSum=maxCrossSum(nums)
+    return max(leftSum,rightSum,middleSum)
+print(maxSubArray([0,-20,-66,-44,-90,-11,-222,1000,3333,-1]))    
+    
+def maxxSubArray(nums):
         """
         :type nums: List[int]
         :rtype: int
         """
         nums=list(nums)
+        '''
+        assume the following
+        i is the main iterator
+        j indicates for the beginning of considered sub array
+        k idicates for the end of considered sub array
+        '''
         i=1
         j=0
         k=0
-        summ=nums[0]
-        sums=[(nums[0],0,0)]
-        delta=0
+        
+        
         if len(nums)<=1:
             return nums
-        
+        summ=nums[0]
+        sums=[(nums[0],0,0)]
         while i< len(nums)and j< len(nums) and k< len(nums):
-            # delta=sums[-1]-sums[-2]
-            print('hiiiiiiiii')
-            print(nums[i])
+            #if the sum is negative
             if summ <= 0 :
-                #print(nums[i],nums[i+1])
+                '''
+                if num is bigger than previous num 
+                in the negative sum spectrum re-adjust j and k
+                and consider point itself a record else just i++
+                '''
                 if nums[i]>nums[i-1]:
                     j=i
                     k=i
                     summ=nums[i]
                     sums.append((nums[i],j,k))
-                    
-   
+                     
+                '''
+                if sum is +ve save the last record and
+                update k pointer with i
+                '''
             else:
                 sums.append((summ,j,k))
                 summ+=nums[i]
@@ -53,8 +96,44 @@ def maxSubArray(nums):
             
         maxx=max(sums,key=operator.itemgetter(0))
         
-        print(sums)
+        #print(sums)
         print(maxx)
         
         return maxx[0]   
-print(maxSubArray([-1,17,0,-17,2,3,4,5,2,3,-9,122,-3]))
+#print(maxSubArray([0,-20,-66,-44,-90,-11,-222,1000,3333,-1]))
+
+'''
+Test complixty
+'''
+def Otime(n):
+    times=[]
+    Ninputs=range(n)
+    inputs=[]
+    start0=time.time()
+    while time.time()-start0<10:
+        for i in range(n):
+            
+            for j in range(10*i):
+                inputs.append(random.randint(-i,i))
+            start=time.time()
+            maxxSubArray(inputs) #function required for test
+            #print('input',inputs)
+            #print('o/p',maxSubArray(inputs))
+            end=time.time()
+            elapsed=end-start
+            times.append(elapsed)
+            inputs.clear()
+        #print('times',times)
+        #print('inputs',Ninputs)
+    #x = np.linspace(0, 100)
+    #plt.hist(inputs)
+    y_mean = np.mean(times[:n])
+    # Generate a smooth line
+    x_smooth = np.linspace(min(Ninputs), max(Ninputs), 300)
+    #y_smooth = si.spline(Ninputs, times[:n], x_smooth)
+
+    plt.plot(Ninputs, times[:n]) # plot the x and y values
+    plt.axhline(y=y_mean, color='r', linestyle='--')
+    #plt.plot(x_smooth, y_smooth, color='g')
+    plt.show() # show the plot
+#Otime(800)
