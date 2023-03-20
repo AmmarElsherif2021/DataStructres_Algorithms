@@ -35,7 +35,7 @@ def maxCrossSum(nums):
         tempSum+=nums[i]
         if rightSum<tempSum:
             rightSum=tempSum
-    return leftSum+rightSum
+    return max(leftSum,rightSum,leftSum+rightSum)
 def maxSubArray(nums):
     if len(nums)==1:
         return nums[0]
@@ -100,7 +100,7 @@ def maxxSubArray(nums):
         print(maxx)
         
         return maxx[0]   
-#print(maxSubArray([0,-20,-66,-44,-90,-11,-222,1000,3333,-1]))
+print(maxxSubArray([0,-20,-66,-44,-90,-11,-222,1000,3333,-1]))
 
 '''
 Test complixty
@@ -116,7 +116,7 @@ def Otime(n):
             for j in range(10*i):
                 inputs.append(random.randint(-i,i))
             start=time.time()
-            maxxSubArray(inputs) #function required for test
+            maxSubArray(inputs) #function required for test
             #print('input',inputs)
             #print('o/p',maxSubArray(inputs))
             end=time.time()
@@ -136,4 +136,4 @@ def Otime(n):
     plt.axhline(y=y_mean, color='r', linestyle='--')
     #plt.plot(x_smooth, y_smooth, color='g')
     plt.show() # show the plot
-#Otime(800)
+Otime(100)
