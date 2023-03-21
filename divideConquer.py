@@ -101,39 +101,3 @@ def maxxSubArray(nums):
         
         return maxx[0]   
 print(maxxSubArray([0,-20,-66,-44,-90,-11,-222,1000,3333,-1]))
-
-'''
-Test complixty
-'''
-def Otime(n):
-    times=[]
-    Ninputs=range(n)
-    inputs=[]
-    start0=time.time()
-    while time.time()-start0<10:
-        for i in range(n):
-            
-            for j in range(10*i):
-                inputs.append(random.randint(-i,i))
-            start=time.time()
-            maxSubArray(inputs) #function required for test
-            #print('input',inputs)
-            #print('o/p',maxSubArray(inputs))
-            end=time.time()
-            elapsed=end-start
-            times.append(elapsed)
-            inputs.clear()
-        #print('times',times)
-        #print('inputs',Ninputs)
-    #x = np.linspace(0, 100)
-    #plt.hist(inputs)
-    y_mean = np.mean(times[:n])
-    # Generate a smooth line
-    x_smooth = np.linspace(min(Ninputs), max(Ninputs), 300)
-    #y_smooth = si.spline(Ninputs, times[:n], x_smooth)
-
-    plt.plot(Ninputs, times[:n]) # plot the x and y values
-    plt.axhline(y=y_mean, color='r', linestyle='--')
-    #plt.plot(x_smooth, y_smooth, color='g')
-    plt.show() # show the plot
-Otime(100)

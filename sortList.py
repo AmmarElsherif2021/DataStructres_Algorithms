@@ -51,7 +51,7 @@ def insertion_sort(nums):
 
 '''
 DEVIDE -> CONQUER -> COMBINE
-* Merge search --
+* Merge sort --
 
 '''
 '''
@@ -101,7 +101,7 @@ def mergeSort(nums):
     return sortedNums
         
         
-#print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))        
+print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))        
 
 '''
 Quick sort 
@@ -142,8 +142,8 @@ def quickSort(nums,start=0,end=None):
 
 
 
-print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
-print(quickSort([4,3,88,90,-3,2,1,8,333]))        
+#print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
+#print(quickSort([4,3,88,90,-3,2,1,8,333]))        
  
 '''
 Test time complexity and plot em
@@ -154,6 +154,7 @@ def get_var_name(var):
     if value is var:
       return name
   return None
+'''
 def Otime(n,function):
     times=[]
     Ninputs=range(n)
@@ -178,10 +179,10 @@ def Otime(n,function):
     plt.plot(Ninputs, times[:n],label=f'{funcName}') # plot the x and y values
     plt.legend()
     plt.show() # show the plot
-'''
-Otime(100,insertionظ_sort)
+    
+Otime(100,insertion_sort)
 Otime(100,bubble)
 Otime(100,mergeSort)
-'''        
-    
+       
+ '''   
     
