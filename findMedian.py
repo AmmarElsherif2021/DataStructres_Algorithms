@@ -10,7 +10,7 @@ import math
 '''
 Using merge sort
 '''
-'''
+
 def merge(list1,list2):
     list1=list(list1)
     list2=list(list2)
@@ -76,7 +76,7 @@ def findMedianSortedArrays0(list1, list2):
         return returnMid(list1)
 #print(findMedianSortedArrays([1,2], [3,4])) 
 
-'''
+
 '''
 Using quick sort
 '''
