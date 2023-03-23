@@ -106,7 +106,7 @@ print(mergeSort([22,11,3,1,77,5,-9,0,5,66]))
 '''
 Quick sort 
 
-cobined of partition() and quickSort()
+combined of partition() and quickSort()
 
 '''        
 def partition(nums, start=0,end=None):
@@ -143,7 +143,7 @@ def quickSort(nums,start=0,end=None):
 
 
 #print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
-#print(quickSort([4,3,88,90,-3,2,1,8,333]))        
+print(quickSort([4,3]))        
  
 '''
 Test time complexity and plot em
