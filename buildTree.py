@@ -16,26 +16,60 @@ class TreeNode:
         self.right=right
         self.value=value
     
-    def getNode(self):
-        return self.value
     def getLeft(self):
         return self.left
     def getRight(self):
         return self.right
+    def getValue(self):
+        return self.value
+    def getNode(self):
+        dna=[self.value]
+        if self.left:
+            dna.append(self.getLeft().getValue())
+        else:
+            dna.append('Null')
+        if self.right:
+            dna.append(self.getRight().getValue())
+        else:
+            dna.append('Null')
+        return dna
+    
 def buildTree(preorder,inorder):
-    if inorder:
-        i=inorder.index(preorder[0])
-        del preorder[0]
-        root=TreeNode(inorder[i])
-        root.left=buildTree(preorder,inorder[:i])
-        root.right=buildTree(preorder,inorder[i+1:])
-        
-        return root
-output=[]
-tree=buildTree([3,9,20,15,7],[9,3,15,20,7])
-while tree.getNode():
-    output.append(tree.getNode())
-    output.append(tree.getLeft())
-    output.append(tree.getRight())
-print(output)
+    nodesArr=[]
+    def initTree(preorder,inorder):
+        preorder2=preorder
+        if inorder:
+            temp=TreeNode()
+            #tree=[0]*((2**len(inorder))-1)
+            i=inorder.index(preorder[0])
+            del preorder[0]
+            
+            root=TreeNode(inorder[i])
+            nodesArr.append(root)
+            root.left=initTree(preorder,inorder[:i])
+            root.right=initTree(preorder,inorder[i+1:])
+              
+            return root
+
+
+    def fillList(preorder,inorder):
+        temp=initTree(preorder,inorder)
+        print(nodesArr)
+        nested=list()
+        for node in nodesArr:
+            nested.append(node.getNode())
+        while nested[-1][-1]=='Null' and nested[-1][-2]=='Null':
+            del nested[-1]
+        while len(nested)>1:
+            for node in nested[1]:
+                if node not in nested[0]:
+                    nested[0].append(node)
+                elif node =='Null':
+                    nested[0].append(node)
+            del nested[1]
+        return(nested[0])
+    return fillList(preorder,inorder)
+print(buildTree([3,9,20,15,7],[9,3,15,20,7]))
+    
+
     
