@@ -42,13 +42,22 @@ def buildTree(preorder,inorder):
             temp=TreeNode()
             #tree=[0]*((2**len(inorder))-1)
             i=inorder.index(preorder[0])
-            del preorder[0]
+            
+            
+            
             
             root=TreeNode(inorder[i])
+            del preorder[0] 
             nodesArr.append(root)
-            root.left=initTree(preorder,inorder[:i])
-            root.right=initTree(preorder,inorder[i+1:])
-              
+            try:
+                root.left=initTree(preorder,inorder[:i])
+            except:
+                root.left=initTree(preorder,[])
+            try:
+                root.right=initTree(preorder,inorder[i+1:])
+            except:
+                root.right=None
+            
             return root
 
 
@@ -64,12 +73,13 @@ def buildTree(preorder,inorder):
             for node in nested[1]:
                 if node not in nested[0]:
                     nested[0].append(node)
-                elif node =='Null':
+                if node =='Null':
                     nested[0].append(node)
             del nested[1]
         return(nested[0])
+    
     return fillList(preorder,inorder)
-print(buildTree([3,9,20,15,7],[9,3,15,20,7]))
+print(buildTree([1,2,3,4,5],[4,2,5,3,1]))
     
 
     
