@@ -25,6 +25,16 @@ class Node:
         return [self.val,self.right,self.left]
 
 class Solution:
+    def mirror(self,Node):
+        if Node ==None:
+            return
+        else:
+            temp = Node
+            self.mirror(Node.left)
+            self.mirror(Node.right)
+            temp = Node.left
+            Node.left = Node.right
+            Node.right = temp
     tree=[]
     def createTree(self,preorder,inorder):
         global tree
@@ -36,28 +46,49 @@ class Solution:
             root.left=self.createTree(preorder,inorder[:index])
             
             root.right=self.createTree(preorder,inorder[index+1:])
-           
-            tempNotion=root.getNode()
-            if tempNotion[1]:
-                tempNotion[1]=tempNotion[1].getVal()
-            if tempNotion[2]:
-                tempNotion[2]=tempNotion[2].getVal()
-            #print(tempNotion)
-            self.tree.append(tempNotion)
+            #try to reverse left and right
+            #root.left,root.right=root.right,root.left
+            
             
             return root
                 
-               
+    def traverse(self,root):
+        
+        tempNotion=root.getNode()
+        if tempNotion[1]:
+            tempNotion[1]=tempNotion[1].getVal()
+        if tempNotion[2]:
+            tempNotion[2]=tempNotion[2].getVal()
+        tempNotion[1],tempNotion[2]=tempNotion[2],tempNotion[1]
+        self.tree.append(tempNotion)
+        if root.left:
+            self.traverse(root.left)
+        if root.right:
+            self.traverse(root.right)
+           
     def buildTree(self,preorder,inorder):
         root=self.createTree(preorder,inorder)
-        treeList=list()
-        treeList.append(self.tree[-1])
-        r=self.tree
+        self.traverse(root)
+        print(self.tree)
+        #self.mirror(root)
+        s=[]
         
-        return r
+        for node in self.tree:
+            #node[1],node[2]=node[2],node[1]
+            
+            for i in range(3):
+                
+                if node[i] not in s or node[i]==None:
+                    s.append(node[i])
+                   
+        
+        return s
         
         
         
         
 solution=Solution()
-print(solution.buildTree([3,9,20,15,5,7,1],[9,3,15,5,20,7,1]))
+s1=solution.buildTree([3,9,20,15,5,7,1],[9,3,15,5,20,7,1])
+print(s1)
+
+    
