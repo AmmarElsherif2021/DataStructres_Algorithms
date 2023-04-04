@@ -18,11 +18,17 @@ class Node:
         self.val=val
         self.left=left
         self.right=right
+    
+    level=0
         
     def getVal(self):
         return self.val
     def getNode(self):
         return [self.val,self.right,self.left]
+    def getLevel(self):
+        return self.level
+    def setLevel(self,level):
+        self.level=level
 
 class Solution:
     def mirror(self,Node):
@@ -43,18 +49,34 @@ class Solution:
             index=inorder.index(preorder[0])
             del preorder[0]
             root=Node(inorder[index])
+            
+            
+            root.left=Node()
+            root.right=Node()
+            
+            
             root.left=self.createTree(preorder,inorder[:index])
             
             root.right=self.createTree(preorder,inorder[index+1:])
+            
+                
+            
+               
+            
             #try to reverse left and right
             #root.left,root.right=root.right,root.left
             
             
             return root
-                
+    
     def traverse(self,root):
-        
+        if root.left:
+            root.left.setLevel(root.getLevel()+1)
+        if root.right:
+            root.right.setLevel(root.getLevel()+1)   
         tempNotion=root.getNode()
+        
+        print(root.getLevel())
         if tempNotion[1]:
             tempNotion[1]=tempNotion[1].getVal()
         if tempNotion[2]:
