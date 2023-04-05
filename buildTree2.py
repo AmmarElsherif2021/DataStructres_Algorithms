@@ -31,6 +31,7 @@ class Node:
         self.level=level
 
 class Solution:
+    
     def mirror(self,Node):
         if Node ==None:
             return
@@ -41,7 +42,7 @@ class Solution:
             temp = Node.left
             Node.left = Node.right
             Node.right = temp
-    tree=[]
+    
     def createTree(self,preorder,inorder):
         global tree
         tempNode=list()
@@ -68,42 +69,51 @@ class Solution:
             
             
             return root
-    
+    treeList=[]
     def traverse(self,root):
+        
         if root.left:
             root.left.setLevel(root.getLevel()+1)
         if root.right:
             root.right.setLevel(root.getLevel()+1)   
         tempNotion=root.getNode()
         
-        print(root.getLevel())
+        #tempNotion.append(root.getLevel())
+        
         if tempNotion[1]:
             tempNotion[1]=tempNotion[1].getVal()
         if tempNotion[2]:
             tempNotion[2]=tempNotion[2].getVal()
         tempNotion[1],tempNotion[2]=tempNotion[2],tempNotion[1]
-        self.tree.append(tempNotion)
+        
+        print(tempNotion)
+        self.treeList.append(tempNotion)
+        
         if root.left:
             self.traverse(root.left)
         if root.right:
             self.traverse(root.right)
-           
+    
+    treeDict={}
+    def traverseTree(self,root):
+        
+        
+         
+    
     def buildTree(self,preorder,inorder):
         root=self.createTree(preorder,inorder)
         self.traverse(root)
-        print(self.tree)
+        print(self.treeList)
         #self.mirror(root)
         s=[]
         
-        for node in self.tree:
+        for node in self.treeList:
             #node[1],node[2]=node[2],node[1]
+            #s.append(node[0])
             
             for i in range(3):
-                
-                if node[i] not in s or node[i]==None:
-                    s.append(node[i])
-                   
-        
+                s.append(node[i])
+  
         return s
         
         
@@ -112,5 +122,3 @@ class Solution:
 solution=Solution()
 s1=solution.buildTree([3,9,20,15,5,7,1],[9,3,15,5,20,7,1])
 print(s1)
-
-    
