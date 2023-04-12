@@ -1,0 +1,33 @@
+This is a brief of what I learned about hashing
+-Hashing provides O(1) time complexity in average for insertion, deletion and searching items in a DB
+-Hash function: function used to map a big integer or a string in to a small integer
+ that can be used as an index in hash table
+-Collision: Two keys (or more) their hashing function resulting in a same value.
+ this must be handled in some collision handling technique.
+
+-examples of collision handling techniques:1-separate chaining 2-open addressing
+[1]-Separate Chaining: is to make a linked list of keys have the same hashing value
+ connected to the slot of this hashing value
+ *** It is used when it is unknown how many or how frequently keys would be inserted or deleted to the table
+ *** Disadvantages: -poor cache performance bcs linked lists are used since we can not make use of locality of reference.
+                    -wasted space in the slots not used.
+
+                    NOTE:Locality of reference refers to the tendency of a processor to access the same
+                    set of memory locations repetitively over a short period of time¹.
+                    There are two basic types of reference locality
+                    – temporal and spatial locality.
+                    Temporal locality refers to the reuse of specific data,
+                    and spatial locality refers to the use of data located close to other recently accessed data.
+
+[2]Open Addressing:Solving collision using probing:-
+                    1- Linear probing
+                       hi(x)=(Hash(x)+i)%HashTableSize --> if full try for h(i+1) and so on..
+                       Chars. : 1- Best cache performance. 2-Suffers from clustering (to find a free slot)
+
+                    2- Quadratic probing
+                       hi(x)=(Hash(x)+i^2)%HashTableSize
+                       chars. : 1- Average cache performance 2- average clustering
+                    3- Double hashing
+                       ** use another hash function
+                       hi(x)=(Hash1(x)+i*Hash2(x))%HashTableSize
+                       chars. :- 1-poor cache performance. 2- less clustering
