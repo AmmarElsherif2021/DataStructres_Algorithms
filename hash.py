@@ -2,39 +2,32 @@
 """
 Created on Wed Apr  5 21:22:19 2023
 
-@author: ahmed
+@author: ammar
 """
 
 class HashMap:
     def __init__(self):
-        self.size = 64
-        self.map = [None] * self.size
-
-    def _get_hash(self, key):
-        hash = 0
-        for char in str(key):
-            hash += ord(char)
-        return hash % self.size
-
-    def add(self, key, value):
-        key_hash = self._get_hash(key)
-        key_value = [key, value]
-
-        if self.map[key_hash] is None:
-            self.map[key_hash] = list([key_value])
-            return True
+        self._values=[None for item in range(256)]
+        self._keys=[]
+    def hashing(self,key):
+        return hash(key) % len(self._keys)
+    def __getitem__(self,key):
+        if self._values[self.hashing(key)] is not None:
+            return self._values[self.hashing(key)]
         else:
-            for pair in self.map[key_hash]:
-                if pair[0] == key:
-                    pair[1] = value
-                    return True
-            self.map[key_hash].append(key_value)
-            return True
+            return 'Not found'
 
-    def get(self, key):
-        key_hash = self._get_hash(key)
-        if self.map[key_hash] is not None:
-            for pair in self.map[key_hash]:
-                if pair[0] == key:
-                    return pair[1]
-        return None
+    def __setitem__(self, key, value):
+        # There must be a value
+        if value is None:
+            raise ValueError('None not permitted as a value')
+        #There is value but never been inserted yet
+        if self.hashing(key) not in self._keys:
+            self._keys.append(self.hashing(key))
+            self._values[self.hashing(key)]=value
+        #inserted before but you wanna update it
+        else:
+            if self.hashing(key):
+                self._values[self.hashing(key)] = value
+
+

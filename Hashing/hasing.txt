@@ -1,3 +1,4 @@
+Visit: https://akshatm.svbtle.com/consistent-hash-rings-theory-and-implementation
 This is a brief of what I learned about hashing
 -Hashing provides O(1) time complexity in average for insertion, deletion and searching items in a DB
 -Hash function: function used to map a big integer or a string in to a small integer
